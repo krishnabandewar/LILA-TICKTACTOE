@@ -1,109 +1,95 @@
-# LILA Multiplayer Tic-Tac-Toe (Nakama)
+# 🕹️ LILA Multiplayer Tic-Tac-Toe (Nakama)
 
-Production-style multiplayer Tic-Tac-Toe with a server-authoritative backend using Nakama.
+A high-performance, **server-authoritative** multiplayer Tic-Tac-Toe game. Built with a production-ready architecture using the **Nakama** game server, **PostgreSQL**, and a modern **TypeScript** web client.
 
-## What is implemented
+---
 
-- Server-authoritative game logic in `nakama/modules/tictactoe.lua`
-- Validated moves and anti-cheat checks on server
-- Random matchmaking (`socket.addMatchmaker`)
-- Room creation via RPC (`create_tictactoe_room`)
-- Room discovery + join by room code
-- Graceful disconnect handling
-- Turn timer (30s) with timeout forfeit
-- Leaderboard updates (wins/losses + score)
-- Mobile-friendly web UI flow:
-  - nickname
-  - find random opponent / create room
-  - live board and turn state
-  - result + leaderboard
+## 🚀 Live Links
+- **Play Now:** [https://lila-tictactoe-ui.vercel.app](https://lila-tictactoe-ui.vercel.app)
+- **Backend API:** `https://lila-nakama-w0pr.onrender.com`
+- **GitHub Repository:** [https://github.com/krishnabandewar/LILA-TICKTACTOE](https://github.com/krishnabandewar/LILA-TICKTACTOE)
 
-## Tech stack
+---
 
-- Frontend: Vite + TypeScript + Nakama JS client
-- Backend: Nakama Lua runtime modules
-- Infra: Docker Compose (`nakama` + `postgres`)
+## ✨ Core Features
+- **Server-Authoritative Game Logic:** All game state transitions and move validations occur on the Lua backend to prevent client-side manipulation.
+- **Real-Time Synchronous Play:** WebSocket-driven state updates with extremely low latency.
+- **Advanced Matchmaking:** 
+  - 🧩 **Random Matchmaking:** Seamlessly find and pair with global opponents using Nakama's matchmaker.
+  - 🏠 **Custom Rooms:** Create private rooms with unique Match IDs to play with friends.
+  - 🔍 **Room Discovery:** Live listing of publicly available game rooms.
+- **Bonus Feature: Leaderboard System:** Track global rankings with Wins, Losses, and **Win Streaks**.
+- **Bonus Feature: Turn Timer:** 30-second move limit with automatic forfeit logic to ensure smooth gameplay.
+- **Glassmorphic UI:** A modern, responsive design system optimized for both desktop and mobile touchpads.
 
-## Project structure
+---
 
-- `docker-compose.yml`: Nakama + Postgres local environment
-- `nakama/local.yml`: Nakama local config
-- `nakama/modules/tictactoe.lua`: match handler + RPCs + leaderboard initialization
-- `frontend/`: web client app
-- `deploy/`: deployment manifests for Render, Railway, AWS ECS
+## 🛠️ Technical Stack
+- **Frontend:**
+  - [Vite](https://vitejs.dev/) + [TypeScript](https://www.typescriptlang.org/)
+  - [Nakama JavaScript Client](https://heroiclabs.com/docs/nakama/clients/javascript/)
+  - CSS3 (Custom Glassmorphism Design System)
+- **Backend:**
+  - [Nakama 3.23.0](https://heroiclabs.com/) (Distributed Game Server)
+  - Lua Cloud Scripts (Match handlers & RPCs)
+  - [PostgreSQL](https://www.postgresql.org/) (Persistent Data Storage)
+- **Infrastructure:**
+  - Docker & Docker Compose (Containerization)
+  - Render (Backend & DB Hosting)
+  - Vercel (Frontend Hosting)
 
-## Local setup
+---
 
-### 1) Start backend
+## 🏛️ System Architecture
+The game follows a **State-Driven, Authoritative Server** model:
+1. **Match Initialization:** The server creates a 3x3 board and manages player symbol assignment (X/O).
+2. **Input Validation:** Clients send *intent* (desired move index). The server validates:
+   - Is it the player's turn?
+   - Is the move within bounds?
+   - Is the target cell empty?
+3. **State Broadcast:** Upon a valid move, the server updates the `boardState`, checks for win/draw conditions, and broadcasts the updated state to all connected clients.
+4. **Resilience:** Graceful handling of player disconnections (automatic forfeit for the quitter) and turn timeouts.
 
+---
+
+## 🛠️ Local Development
+
+### 1. Prerequisites
+- [Docker & Docker Compose](https://www.docker.com/)
+- [Node.js](https://nodejs.org/) (v18+)
+
+### 2. Run the Backend
 ```bash
-docker compose up -d
+# Start Nakama and PostgreSQL
+docker-compose up -d
 ```
+Access the Nakama Console at `http://127.0.0.1:7351` (Username: `admin`, Password: `password`).
 
-Nakama endpoints:
-- HTTP API: `http://127.0.0.1:7350`
-- Console: `http://127.0.0.1:7351`
-
-### 2) Start frontend
-
+### 3. Run the Frontend
 ```bash
 cd frontend
-cp .env.example .env
 npm install
+# Configure your local environment (copy .env.example)
 npm run dev
 ```
 
-Open the Vite URL shown in terminal.
+---
 
-## Multiplayer test plan
+## 🎮 How to Test
 
-1. Open two browser windows (or two devices) using the frontend URL.
-2. Login with different nicknames.
-3. Test `Find random player` in both windows:
-   - both users should enter same match
-   - move validation should enforce turns and prevent overwrites
-4. Test `Create room` in one window and join from second user using:
-   - open room list, or
-   - join by room id/code
-5. Play a full game:
-   - verify win or draw is correctly detected
-   - verify leaderboard updates after game finishes
-6. Let one turn idle for 30+ seconds:
-   - timeout should forfeit and finish game
+1. **Multiplayer Pairing:** Open the live link in *two different* browsers or private windows.
+2. **Auth:** Login with different nicknames (e.g., "Player1" and "Player2").
+3. **Random Match:** Click **"Find Random Player"** on both windows. You will be paired instantly.
+4. **Room Join:** Alternatively, create a room in Window A, copy the `Match ID`, and join from Window B using the `Join` button.
+5. **Turn Timer:** Let the turn idle for 30 seconds to see the automated forfeit and leaderboard update in action.
 
-## Deployment notes
+---
 
-### Backend (Nakama)
+## ⚖️ Design Decisions
+- **Event Delegation:** Implemented custom event delegation for UI interactions to avoid "click loss" during high-frequency React-style re-renders on touchpads.
+- **Sparse Object Parsing:** Optimized frontend parsing for Lua-serialized sparse arrays to ensure cross-language data integrity.
+- **Cloud-Ready Config:** Used environment variable injection for `DATABASE_ADDRESS` and `NAKAMA_HOST` to allow seamless transition between local, Render, and Railway environments.
 
-- Deploy the same Docker image + mounted Lua runtime module files to any cloud VM/container platform.
-- Expose ports `7350` and `7351`.
-- Use managed Postgres for production and update DB connection string.
-- Set secure server key and TLS termination at load balancer/reverse proxy.
+---
 
-Ready-to-edit backend deployment templates:
-- Render: `deploy/render.yaml`
-- Railway: `deploy/railway.json` + `deploy/railway.nakama.Dockerfile`
-- AWS ECS Fargate: `deploy/aws-ecs-taskdef.json`
-
-### Frontend
-
-- Build static assets via `npm run build`.
-- Deploy `frontend/dist` to Netlify, Vercel, Cloudflare Pages, S3+CloudFront, or similar.
-- Set environment variables to your public Nakama host and ports.
-
-## API/runtime configuration details
-
-- Server key: `defaultkey` (change for production)
-- Match module id: `tictactoe`
-- Client move opcode: `1`
-- Server state broadcast opcode: `10`
-- Leaderboard id: `ttt_global`
-- Room creation RPC id: `create_tictactoe_room`
-- Room list RPC id: `list_tictactoe_rooms`
-
-## Design decisions
-
-- Authoritative server owns all game state transitions.
-- Client only sends desired move index; server validates and applies.
-- Single source of truth is state broadcast from Nakama match loop.
-- Lightweight UI with clear phase transitions (auth, lobby, game).
+Made with ❤️ by [Krishna Bandewar](https://github.com/krishnabandewar)
