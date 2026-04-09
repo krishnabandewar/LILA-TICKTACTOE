@@ -9,4 +9,4 @@ CMD /nakama/nakama migrate up --database.address ${DATABASE_ADDRESS} && \
       --database.address ${DATABASE_ADDRESS} \
       --logger.level INFO \
       --runtime.path /nakama/data/modules \
-      --config /nakama/data/local.yml
+      
