@@ -1,0 +1,8 @@
+name: "nakama1"
+database:
+  address:
+    - "root@postgres:localdb"
+runtime:
+  path: "/nakama/data/modules"
+logger:
+  level: "INFO"

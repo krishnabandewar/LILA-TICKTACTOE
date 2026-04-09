@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: lila-nakama
+    runtime: image
+    image:
+      url: heroiclabs/nakama:3.23.0
+    envVars:
+      - key: DATABASE_ADDRESS
+        value: root:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/nakama
+      - key: SESSION_TOKEN_EXPIRY_SEC
+        value: "7200"
+    startCommand: >
+      /nakama/nakama migrate up --database.address "$DATABASE_ADDRESS" &&
+      /nakama/nakama
+      --name nakama1
+      --database.address "$DATABASE_ADDRESS"
+      --logger.level INFO
+      --runtime.path /nakama/data/modules
+    disk:
+      name: nakama-data
+      mountPath: /nakama/data
+      sizeGB: 1

@@ -1,0 +1,36 @@
+{
+  "family": "lila-nakama",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::<account-id>:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::<account-id>:role/ecsTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "nakama",
+      "image": "heroiclabs/nakama:3.23.0",
+      "essential": true,
+      "portMappings": [
+        { "containerPort": 7350, "protocol": "tcp" },
+        { "containerPort": 7351, "protocol": "tcp" }
+      ],
+      "environment": [
+        { "name": "DATABASE_ADDRESS", "value": "root:<password>@<postgres-host>:5432/nakama" }
+      ],
+      "command": [
+        "/bin/sh",
+        "-ec",
+        "/nakama/nakama migrate up --database.address $DATABASE_ADDRESS && /nakama/nakama --name nakama1 --database.address $DATABASE_ADDRESS --logger.level INFO --runtime.path /nakama/data/modules --config /nakama/data/local.yml"
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/lila-nakama",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

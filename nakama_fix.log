@@ -1,0 +1,180 @@
++ /nakama/nakama migrate up --database.address root:localdb@postgres:5432/nakama
+{"level":"info","ts":"2026-04-08T19:04:30.693Z","caller":"server/db.go:140","msg":"Database information","version":"PostgreSQL 16.13 (Debian 16.13-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit"}
+{"level":"info","ts":"2026-04-08T19:04:30.693Z","caller":"migrate/migrate.go:109","msg":"Applying database migrations","limit":-1}
+{"level":"info","ts":"2026-04-08T19:04:30.703Z","caller":"migrate/migrate.go:116","msg":"Successfully applied migration","count":0}
++ exec /nakama/nakama --name nakama1 --database.address root:localdb@postgres:5432/nakama --logger.level DEBUG --session.token_expiry_sec 7200 --runtime.path /nakama/data/modules --config /nakama/data/local.yml
+{"level":"info","ts":"2026-04-08T19:04:30.748Z","caller":"server/config.go:91","msg":"Successfully loaded config file","path":"/nakama/data/local.yml"}
+{"level":"warn","ts":"2026-04-08T19:04:30.749Z","caller":"server/config.go:323","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.username"}
+{"level":"warn","ts":"2026-04-08T19:04:30.749Z","caller":"server/config.go:327","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.password"}
+{"level":"warn","ts":"2026-04-08T19:04:30.749Z","caller":"server/config.go:331","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.signing_key"}
+{"level":"warn","ts":"2026-04-08T19:04:30.749Z","caller":"server/config.go:335","msg":"WARNING: insecure default parameter value, change this for production!","param":"socket.server_key"}
+{"level":"warn","ts":"2026-04-08T19:04:30.749Z","caller":"server/config.go:339","msg":"WARNING: insecure default parameter value, change this for production!","param":"session.encryption_key"}
+{"level":"warn","ts":"2026-04-08T19:04:30.749Z","caller":"server/config.go:343","msg":"WARNING: insecure default parameter value, change this for production!","param":"session.refresh_encryption_key"}
+{"level":"warn","ts":"2026-04-08T19:04:30.749Z","caller":"server/config.go:347","msg":"WARNING: insecure default parameter value, change this for production!","param":"runtime.http_key"}
+{"level":"info","ts":"2026-04-08T19:04:30.749Z","caller":"main.go:136","msg":"Nakama starting"}
+{"level":"info","ts":"2026-04-08T19:04:30.749Z","caller":"main.go:137","msg":"Node","name":"nakama1","version":"3.23.0+1811efb0","runtime":"go1.22.5","cpu":12,"proc":12}
+{"level":"info","ts":"2026-04-08T19:04:30.749Z","caller":"main.go:138","msg":"Data directory","path":"/nakama/data"}
+{"level":"info","ts":"2026-04-08T19:04:30.749Z","caller":"main.go:149","msg":"Database connections","dsns":["root:xxxxx@postgres:5432/nakama"]}
+{"level":"debug","ts":"2026-04-08T19:04:30.751Z","caller":"server/db.go:116","msg":"Complete database connection URL","raw_url":"postgres://root:localdb@postgres:5432/nakama?sslmode=prefer"}
+{"level":"info","ts":"2026-04-08T19:04:30.768Z","caller":"server/db.go:140","msg":"Database information","version":"PostgreSQL 16.13 (Debian 16.13-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit"}
+{"level":"info","ts":"2026-04-08T19:04:30.798Z","caller":"server/leaderboard_rank_cache.go:140","msg":"Initializing leaderboard rank cache"}
+{"level":"info","ts":"2026-04-08T19:04:30.798Z","caller":"server/leaderboard_rank_cache.go:201","msg":"Leaderboard rank cache initialization completed successfully","cached":[],"skipped":[],"duration":"325.981µs"}
+{"level":"info","ts":"2026-04-08T19:04:30.798Z","caller":"server/runtime.go:646","msg":"Initialising runtime","path":"/nakama/data/modules"}
+{"level":"info","ts":"2026-04-08T19:04:30.805Z","caller":"server/runtime.go:653","msg":"Initialising runtime event queue processor"}
+{"level":"info","ts":"2026-04-08T19:04:30.805Z","caller":"server/runtime.go:655","msg":"Runtime event queue processor started","size":65536,"workers":8}
+{"level":"info","ts":"2026-04-08T19:04:30.805Z","caller":"server/runtime_go.go:2794","msg":"Initialising Go runtime provider","path":"/nakama/data/modules"}
+{"level":"info","ts":"2026-04-08T19:04:30.806Z","caller":"server/runtime_go.go:2818","msg":"Go runtime modules loaded"}
+{"level":"info","ts":"2026-04-08T19:04:30.806Z","caller":"server/runtime_lua.go:116","msg":"Initialising Lua runtime provider","path":"/nakama/data/modules"}
+{"level":"error","ts":"2026-04-08T19:04:30.819Z","caller":"server/runtime_lua.go:2271","msg":"Could not complete runtime invocation","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
+{"level":"error","ts":"2026-04-08T19:04:30.819Z","caller":"server/runtime.go:667","msg":"Error initialising Lua runtime provider","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
+{"level":"fatal","ts":"2026-04-08T19:04:30.819Z","caller":"main.go:197","msg":"Failed initializing runtime modules","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
++ /nakama/nakama migrate up --database.address root:localdb@postgres:5432/nakama
+{"level":"info","ts":"2026-04-08T19:04:31.985Z","caller":"server/db.go:140","msg":"Database information","version":"PostgreSQL 16.13 (Debian 16.13-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit"}
+{"level":"info","ts":"2026-04-08T19:04:31.985Z","caller":"migrate/migrate.go:109","msg":"Applying database migrations","limit":-1}
+{"level":"info","ts":"2026-04-08T19:04:31.994Z","caller":"migrate/migrate.go:116","msg":"Successfully applied migration","count":0}
++ exec /nakama/nakama --name nakama1 --database.address root:localdb@postgres:5432/nakama --logger.level DEBUG --session.token_expiry_sec 7200 --runtime.path /nakama/data/modules --config /nakama/data/local.yml
+{"level":"info","ts":"2026-04-08T19:04:32.038Z","caller":"server/config.go:91","msg":"Successfully loaded config file","path":"/nakama/data/local.yml"}
+{"level":"warn","ts":"2026-04-08T19:04:32.039Z","caller":"server/config.go:323","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.username"}
+{"level":"warn","ts":"2026-04-08T19:04:32.039Z","caller":"server/config.go:327","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.password"}
+{"level":"warn","ts":"2026-04-08T19:04:32.039Z","caller":"server/config.go:331","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.signing_key"}
+{"level":"warn","ts":"2026-04-08T19:04:32.039Z","caller":"server/config.go:335","msg":"WARNING: insecure default parameter value, change this for production!","param":"socket.server_key"}
+{"level":"warn","ts":"2026-04-08T19:04:32.039Z","caller":"server/config.go:339","msg":"WARNING: insecure default parameter value, change this for production!","param":"session.encryption_key"}
+{"level":"warn","ts":"2026-04-08T19:04:32.039Z","caller":"server/config.go:343","msg":"WARNING: insecure default parameter value, change this for production!","param":"session.refresh_encryption_key"}
+{"level":"warn","ts":"2026-04-08T19:04:32.039Z","caller":"server/config.go:347","msg":"WARNING: insecure default parameter value, change this for production!","param":"runtime.http_key"}
+{"level":"info","ts":"2026-04-08T19:04:32.039Z","caller":"main.go:136","msg":"Nakama starting"}
+{"level":"info","ts":"2026-04-08T19:04:32.039Z","caller":"main.go:137","msg":"Node","name":"nakama1","version":"3.23.0+1811efb0","runtime":"go1.22.5","cpu":12,"proc":12}
+{"level":"info","ts":"2026-04-08T19:04:32.039Z","caller":"main.go:138","msg":"Data directory","path":"/nakama/data"}
+{"level":"info","ts":"2026-04-08T19:04:32.039Z","caller":"main.go:149","msg":"Database connections","dsns":["root:xxxxx@postgres:5432/nakama"]}
+{"level":"debug","ts":"2026-04-08T19:04:32.041Z","caller":"server/db.go:116","msg":"Complete database connection URL","raw_url":"postgres://root:localdb@postgres:5432/nakama?sslmode=prefer"}
+{"level":"info","ts":"2026-04-08T19:04:32.058Z","caller":"server/db.go:140","msg":"Database information","version":"PostgreSQL 16.13 (Debian 16.13-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit"}
+{"level":"info","ts":"2026-04-08T19:04:32.084Z","caller":"server/leaderboard_rank_cache.go:140","msg":"Initializing leaderboard rank cache"}
+{"level":"info","ts":"2026-04-08T19:04:32.085Z","caller":"server/leaderboard_rank_cache.go:201","msg":"Leaderboard rank cache initialization completed successfully","cached":[],"skipped":[],"duration":"230.14µs"}
+{"level":"info","ts":"2026-04-08T19:04:32.085Z","caller":"server/runtime.go:646","msg":"Initialising runtime","path":"/nakama/data/modules"}
+{"level":"info","ts":"2026-04-08T19:04:32.095Z","caller":"server/runtime.go:653","msg":"Initialising runtime event queue processor"}
+{"level":"info","ts":"2026-04-08T19:04:32.095Z","caller":"server/runtime.go:655","msg":"Runtime event queue processor started","size":65536,"workers":8}
+{"level":"info","ts":"2026-04-08T19:04:32.095Z","caller":"server/runtime_go.go:2794","msg":"Initialising Go runtime provider","path":"/nakama/data/modules"}
+{"level":"info","ts":"2026-04-08T19:04:32.095Z","caller":"server/runtime_go.go:2818","msg":"Go runtime modules loaded"}
+{"level":"info","ts":"2026-04-08T19:04:32.095Z","caller":"server/runtime_lua.go:116","msg":"Initialising Lua runtime provider","path":"/nakama/data/modules"}
+{"level":"error","ts":"2026-04-08T19:04:32.111Z","caller":"server/runtime_lua.go:2271","msg":"Could not complete runtime invocation","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
+{"level":"error","ts":"2026-04-08T19:04:32.111Z","caller":"server/runtime.go:667","msg":"Error initialising Lua runtime provider","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
+{"level":"fatal","ts":"2026-04-08T19:04:32.111Z","caller":"main.go:197","msg":"Failed initializing runtime modules","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
++ /nakama/nakama migrate up --database.address root:localdb@postgres:5432/nakama
+{"level":"info","ts":"2026-04-08T19:04:33.273Z","caller":"server/db.go:140","msg":"Database information","version":"PostgreSQL 16.13 (Debian 16.13-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit"}
+{"level":"info","ts":"2026-04-08T19:04:33.274Z","caller":"migrate/migrate.go:109","msg":"Applying database migrations","limit":-1}
+{"level":"info","ts":"2026-04-08T19:04:33.282Z","caller":"migrate/migrate.go:116","msg":"Successfully applied migration","count":0}
++ exec /nakama/nakama --name nakama1 --database.address root:localdb@postgres:5432/nakama --logger.level DEBUG --session.token_expiry_sec 7200 --runtime.path /nakama/data/modules --config /nakama/data/local.yml
+{"level":"info","ts":"2026-04-08T19:04:33.326Z","caller":"server/config.go:91","msg":"Successfully loaded config file","path":"/nakama/data/local.yml"}
+{"level":"warn","ts":"2026-04-08T19:04:33.327Z","caller":"server/config.go:323","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.username"}
+{"level":"warn","ts":"2026-04-08T19:04:33.327Z","caller":"server/config.go:327","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.password"}
+{"level":"warn","ts":"2026-04-08T19:04:33.327Z","caller":"server/config.go:331","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.signing_key"}
+{"level":"warn","ts":"2026-04-08T19:04:33.327Z","caller":"server/config.go:335","msg":"WARNING: insecure default parameter value, change this for production!","param":"socket.server_key"}
+{"level":"warn","ts":"2026-04-08T19:04:33.327Z","caller":"server/config.go:339","msg":"WARNING: insecure default parameter value, change this for production!","param":"session.encryption_key"}
+{"level":"warn","ts":"2026-04-08T19:04:33.327Z","caller":"server/config.go:343","msg":"WARNING: insecure default parameter value, change this for production!","param":"session.refresh_encryption_key"}
+{"level":"warn","ts":"2026-04-08T19:04:33.327Z","caller":"server/config.go:347","msg":"WARNING: insecure default parameter value, change this for production!","param":"runtime.http_key"}
+{"level":"info","ts":"2026-04-08T19:04:33.327Z","caller":"main.go:136","msg":"Nakama starting"}
+{"level":"info","ts":"2026-04-08T19:04:33.327Z","caller":"main.go:137","msg":"Node","name":"nakama1","version":"3.23.0+1811efb0","runtime":"go1.22.5","cpu":12,"proc":12}
+{"level":"info","ts":"2026-04-08T19:04:33.327Z","caller":"main.go:138","msg":"Data directory","path":"/nakama/data"}
+{"level":"info","ts":"2026-04-08T19:04:33.328Z","caller":"main.go:149","msg":"Database connections","dsns":["root:xxxxx@postgres:5432/nakama"]}
+{"level":"debug","ts":"2026-04-08T19:04:33.329Z","caller":"server/db.go:116","msg":"Complete database connection URL","raw_url":"postgres://root:localdb@postgres:5432/nakama?sslmode=prefer"}
+{"level":"info","ts":"2026-04-08T19:04:33.345Z","caller":"server/db.go:140","msg":"Database information","version":"PostgreSQL 16.13 (Debian 16.13-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit"}
+{"level":"info","ts":"2026-04-08T19:04:33.376Z","caller":"server/leaderboard_rank_cache.go:140","msg":"Initializing leaderboard rank cache"}
+{"level":"info","ts":"2026-04-08T19:04:33.376Z","caller":"server/runtime.go:646","msg":"Initialising runtime","path":"/nakama/data/modules"}
+{"level":"info","ts":"2026-04-08T19:04:33.376Z","caller":"server/leaderboard_rank_cache.go:201","msg":"Leaderboard rank cache initialization completed successfully","cached":[],"skipped":[],"duration":"366.937µs"}
+{"level":"info","ts":"2026-04-08T19:04:33.385Z","caller":"server/runtime.go:653","msg":"Initialising runtime event queue processor"}
+{"level":"info","ts":"2026-04-08T19:04:33.385Z","caller":"server/runtime.go:655","msg":"Runtime event queue processor started","size":65536,"workers":8}
+{"level":"info","ts":"2026-04-08T19:04:33.385Z","caller":"server/runtime_go.go:2794","msg":"Initialising Go runtime provider","path":"/nakama/data/modules"}
+{"level":"info","ts":"2026-04-08T19:04:33.385Z","caller":"server/runtime_go.go:2818","msg":"Go runtime modules loaded"}
+{"level":"info","ts":"2026-04-08T19:04:33.385Z","caller":"server/runtime_lua.go:116","msg":"Initialising Lua runtime provider","path":"/nakama/data/modules"}
+{"level":"error","ts":"2026-04-08T19:04:33.400Z","caller":"server/runtime_lua.go:2271","msg":"Could not complete runtime invocation","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
+{"level":"error","ts":"2026-04-08T19:04:33.400Z","caller":"server/runtime.go:667","msg":"Error initialising Lua runtime provider","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
+{"level":"fatal","ts":"2026-04-08T19:04:33.400Z","caller":"main.go:197","msg":"Failed initializing runtime modules","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
++ /nakama/nakama migrate up --database.address root:localdb@postgres:5432/nakama
+{"level":"info","ts":"2026-04-08T19:04:34.494Z","caller":"server/db.go:140","msg":"Database information","version":"PostgreSQL 16.13 (Debian 16.13-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit"}
+{"level":"info","ts":"2026-04-08T19:04:34.494Z","caller":"migrate/migrate.go:109","msg":"Applying database migrations","limit":-1}
+{"level":"info","ts":"2026-04-08T19:04:34.504Z","caller":"migrate/migrate.go:116","msg":"Successfully applied migration","count":0}
++ exec /nakama/nakama --name nakama1 --database.address root:localdb@postgres:5432/nakama --logger.level DEBUG --session.token_expiry_sec 7200 --runtime.path /nakama/data/modules --config /nakama/data/local.yml
+{"level":"info","ts":"2026-04-08T19:04:34.554Z","caller":"server/config.go:91","msg":"Successfully loaded config file","path":"/nakama/data/local.yml"}
+{"level":"warn","ts":"2026-04-08T19:04:34.555Z","caller":"server/config.go:323","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.username"}
+{"level":"warn","ts":"2026-04-08T19:04:34.555Z","caller":"server/config.go:327","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.password"}
+{"level":"warn","ts":"2026-04-08T19:04:34.555Z","caller":"server/config.go:331","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.signing_key"}
+{"level":"warn","ts":"2026-04-08T19:04:34.555Z","caller":"server/config.go:335","msg":"WARNING: insecure default parameter value, change this for production!","param":"socket.server_key"}
+{"level":"warn","ts":"2026-04-08T19:04:34.555Z","caller":"server/config.go:339","msg":"WARNING: insecure default parameter value, change this for production!","param":"session.encryption_key"}
+{"level":"warn","ts":"2026-04-08T19:04:34.555Z","caller":"server/config.go:343","msg":"WARNING: insecure default parameter value, change this for production!","param":"session.refresh_encryption_key"}
+{"level":"warn","ts":"2026-04-08T19:04:34.555Z","caller":"server/config.go:347","msg":"WARNING: insecure default parameter value, change this for production!","param":"runtime.http_key"}
+{"level":"info","ts":"2026-04-08T19:04:34.555Z","caller":"main.go:136","msg":"Nakama starting"}
+{"level":"info","ts":"2026-04-08T19:04:34.555Z","caller":"main.go:137","msg":"Node","name":"nakama1","version":"3.23.0+1811efb0","runtime":"go1.22.5","cpu":12,"proc":12}
+{"level":"info","ts":"2026-04-08T19:04:34.555Z","caller":"main.go:138","msg":"Data directory","path":"/nakama/data"}
+{"level":"info","ts":"2026-04-08T19:04:34.555Z","caller":"main.go:149","msg":"Database connections","dsns":["root:xxxxx@postgres:5432/nakama"]}
+{"level":"debug","ts":"2026-04-08T19:04:34.557Z","caller":"server/db.go:116","msg":"Complete database connection URL","raw_url":"postgres://root:localdb@postgres:5432/nakama?sslmode=prefer"}
+{"level":"info","ts":"2026-04-08T19:04:34.577Z","caller":"server/db.go:140","msg":"Database information","version":"PostgreSQL 16.13 (Debian 16.13-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit"}
+{"level":"info","ts":"2026-04-08T19:04:34.611Z","caller":"server/leaderboard_rank_cache.go:140","msg":"Initializing leaderboard rank cache"}
+{"level":"info","ts":"2026-04-08T19:04:34.611Z","caller":"server/leaderboard_rank_cache.go:201","msg":"Leaderboard rank cache initialization completed successfully","cached":[],"skipped":[],"duration":"269.935µs"}
+{"level":"info","ts":"2026-04-08T19:04:34.611Z","caller":"server/runtime.go:646","msg":"Initialising runtime","path":"/nakama/data/modules"}
+{"level":"info","ts":"2026-04-08T19:04:34.619Z","caller":"server/runtime.go:653","msg":"Initialising runtime event queue processor"}
+{"level":"info","ts":"2026-04-08T19:04:34.619Z","caller":"server/runtime.go:655","msg":"Runtime event queue processor started","size":65536,"workers":8}
+{"level":"info","ts":"2026-04-08T19:04:34.619Z","caller":"server/runtime_go.go:2794","msg":"Initialising Go runtime provider","path":"/nakama/data/modules"}
+{"level":"info","ts":"2026-04-08T19:04:34.620Z","caller":"server/runtime_go.go:2818","msg":"Go runtime modules loaded"}
+{"level":"info","ts":"2026-04-08T19:04:34.620Z","caller":"server/runtime_lua.go:116","msg":"Initialising Lua runtime provider","path":"/nakama/data/modules"}
+{"level":"error","ts":"2026-04-08T19:04:34.631Z","caller":"server/runtime_lua.go:2271","msg":"Could not complete runtime invocation","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
+{"level":"error","ts":"2026-04-08T19:04:34.631Z","caller":"server/runtime.go:667","msg":"Error initialising Lua runtime provider","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
+{"level":"fatal","ts":"2026-04-08T19:04:34.631Z","caller":"main.go:197","msg":"Failed initializing runtime modules","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
++ /nakama/nakama migrate up --database.address root:localdb@postgres:5432/nakama
+{"level":"info","ts":"2026-04-08T19:04:35.989Z","caller":"server/db.go:140","msg":"Database information","version":"PostgreSQL 16.13 (Debian 16.13-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit"}
+{"level":"info","ts":"2026-04-08T19:04:35.989Z","caller":"migrate/migrate.go:109","msg":"Applying database migrations","limit":-1}
+{"level":"info","ts":"2026-04-08T19:04:35.997Z","caller":"migrate/migrate.go:116","msg":"Successfully applied migration","count":0}
++ exec /nakama/nakama --name nakama1 --database.address root:localdb@postgres:5432/nakama --logger.level DEBUG --session.token_expiry_sec 7200 --runtime.path /nakama/data/modules --config /nakama/data/local.yml
+{"level":"info","ts":"2026-04-08T19:04:36.039Z","caller":"server/config.go:91","msg":"Successfully loaded config file","path":"/nakama/data/local.yml"}
+{"level":"warn","ts":"2026-04-08T19:04:36.040Z","caller":"server/config.go:323","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.username"}
+{"level":"warn","ts":"2026-04-08T19:04:36.040Z","caller":"server/config.go:327","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.password"}
+{"level":"warn","ts":"2026-04-08T19:04:36.040Z","caller":"server/config.go:331","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.signing_key"}
+{"level":"warn","ts":"2026-04-08T19:04:36.040Z","caller":"server/config.go:335","msg":"WARNING: insecure default parameter value, change this for production!","param":"socket.server_key"}
+{"level":"warn","ts":"2026-04-08T19:04:36.040Z","caller":"server/config.go:339","msg":"WARNING: insecure default parameter value, change this for production!","param":"session.encryption_key"}
+{"level":"warn","ts":"2026-04-08T19:04:36.040Z","caller":"server/config.go:343","msg":"WARNING: insecure default parameter value, change this for production!","param":"session.refresh_encryption_key"}
+{"level":"warn","ts":"2026-04-08T19:04:36.040Z","caller":"server/config.go:347","msg":"WARNING: insecure default parameter value, change this for production!","param":"runtime.http_key"}
+{"level":"info","ts":"2026-04-08T19:04:36.040Z","caller":"main.go:136","msg":"Nakama starting"}
+{"level":"info","ts":"2026-04-08T19:04:36.040Z","caller":"main.go:137","msg":"Node","name":"nakama1","version":"3.23.0+1811efb0","runtime":"go1.22.5","cpu":12,"proc":12}
+{"level":"info","ts":"2026-04-08T19:04:36.040Z","caller":"main.go:138","msg":"Data directory","path":"/nakama/data"}
+{"level":"info","ts":"2026-04-08T19:04:36.040Z","caller":"main.go:149","msg":"Database connections","dsns":["root:xxxxx@postgres:5432/nakama"]}
+{"level":"debug","ts":"2026-04-08T19:04:36.042Z","caller":"server/db.go:116","msg":"Complete database connection URL","raw_url":"postgres://root:localdb@postgres:5432/nakama?sslmode=prefer"}
+{"level":"info","ts":"2026-04-08T19:04:36.059Z","caller":"server/db.go:140","msg":"Database information","version":"PostgreSQL 16.13 (Debian 16.13-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit"}
+{"level":"info","ts":"2026-04-08T19:04:36.084Z","caller":"server/leaderboard_rank_cache.go:140","msg":"Initializing leaderboard rank cache"}
+{"level":"info","ts":"2026-04-08T19:04:36.085Z","caller":"server/runtime.go:646","msg":"Initialising runtime","path":"/nakama/data/modules"}
+{"level":"info","ts":"2026-04-08T19:04:36.085Z","caller":"server/leaderboard_rank_cache.go:201","msg":"Leaderboard rank cache initialization completed successfully","cached":[],"skipped":[],"duration":"437.393µs"}
+{"level":"info","ts":"2026-04-08T19:04:36.092Z","caller":"server/runtime.go:653","msg":"Initialising runtime event queue processor"}
+{"level":"info","ts":"2026-04-08T19:04:36.092Z","caller":"server/runtime.go:655","msg":"Runtime event queue processor started","size":65536,"workers":8}
+{"level":"info","ts":"2026-04-08T19:04:36.092Z","caller":"server/runtime_go.go:2794","msg":"Initialising Go runtime provider","path":"/nakama/data/modules"}
+{"level":"info","ts":"2026-04-08T19:04:36.092Z","caller":"server/runtime_go.go:2818","msg":"Go runtime modules loaded"}
+{"level":"info","ts":"2026-04-08T19:04:36.092Z","caller":"server/runtime_lua.go:116","msg":"Initialising Lua runtime provider","path":"/nakama/data/modules"}
+{"level":"error","ts":"2026-04-08T19:04:36.102Z","caller":"server/runtime_lua.go:2271","msg":"Could not complete runtime invocation","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
+{"level":"error","ts":"2026-04-08T19:04:36.102Z","caller":"server/runtime.go:667","msg":"Error initialising Lua runtime provider","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
+{"level":"fatal","ts":"2026-04-08T19:04:36.102Z","caller":"main.go:197","msg":"Failed initializing runtime modules","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
++ /nakama/nakama migrate up --database.address root:localdb@postgres:5432/nakama
+{"level":"info","ts":"2026-04-08T19:04:38.324Z","caller":"server/db.go:140","msg":"Database information","version":"PostgreSQL 16.13 (Debian 16.13-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit"}
+{"level":"info","ts":"2026-04-08T19:04:38.325Z","caller":"migrate/migrate.go:109","msg":"Applying database migrations","limit":-1}
+{"level":"info","ts":"2026-04-08T19:04:38.336Z","caller":"migrate/migrate.go:116","msg":"Successfully applied migration","count":0}
++ exec /nakama/nakama --name nakama1 --database.address root:localdb@postgres:5432/nakama --logger.level DEBUG --session.token_expiry_sec 7200 --runtime.path /nakama/data/modules --config /nakama/data/local.yml
+{"level":"info","ts":"2026-04-08T19:04:38.395Z","caller":"server/config.go:91","msg":"Successfully loaded config file","path":"/nakama/data/local.yml"}
+{"level":"warn","ts":"2026-04-08T19:04:38.396Z","caller":"server/config.go:323","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.username"}
+{"level":"warn","ts":"2026-04-08T19:04:38.396Z","caller":"server/config.go:327","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.password"}
+{"level":"warn","ts":"2026-04-08T19:04:38.396Z","caller":"server/config.go:331","msg":"WARNING: insecure default parameter value, change this for production!","param":"console.signing_key"}
+{"level":"warn","ts":"2026-04-08T19:04:38.396Z","caller":"server/config.go:335","msg":"WARNING: insecure default parameter value, change this for production!","param":"socket.server_key"}
+{"level":"warn","ts":"2026-04-08T19:04:38.396Z","caller":"server/config.go:339","msg":"WARNING: insecure default parameter value, change this for production!","param":"session.encryption_key"}
+{"level":"warn","ts":"2026-04-08T19:04:38.396Z","caller":"server/config.go:343","msg":"WARNING: insecure default parameter value, change this for production!","param":"session.refresh_encryption_key"}
+{"level":"warn","ts":"2026-04-08T19:04:38.396Z","caller":"server/config.go:347","msg":"WARNING: insecure default parameter value, change this for production!","param":"runtime.http_key"}
+{"level":"info","ts":"2026-04-08T19:04:38.396Z","caller":"main.go:136","msg":"Nakama starting"}
+{"level":"info","ts":"2026-04-08T19:04:38.396Z","caller":"main.go:137","msg":"Node","name":"nakama1","version":"3.23.0+1811efb0","runtime":"go1.22.5","cpu":12,"proc":12}
+{"level":"info","ts":"2026-04-08T19:04:38.396Z","caller":"main.go:138","msg":"Data directory","path":"/nakama/data"}
+{"level":"info","ts":"2026-04-08T19:04:38.396Z","caller":"main.go:149","msg":"Database connections","dsns":["root:xxxxx@postgres:5432/nakama"]}
+{"level":"debug","ts":"2026-04-08T19:04:38.398Z","caller":"server/db.go:116","msg":"Complete database connection URL","raw_url":"postgres://root:localdb@postgres:5432/nakama?sslmode=prefer"}
+{"level":"info","ts":"2026-04-08T19:04:38.418Z","caller":"server/db.go:140","msg":"Database information","version":"PostgreSQL 16.13 (Debian 16.13-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit"}
+{"level":"info","ts":"2026-04-08T19:04:38.448Z","caller":"server/leaderboard_rank_cache.go:140","msg":"Initializing leaderboard rank cache"}
+{"level":"info","ts":"2026-04-08T19:04:38.448Z","caller":"server/runtime.go:646","msg":"Initialising runtime","path":"/nakama/data/modules"}
+{"level":"info","ts":"2026-04-08T19:04:38.448Z","caller":"server/leaderboard_rank_cache.go:201","msg":"Leaderboard rank cache initialization completed successfully","cached":[],"skipped":[],"duration":"226.683µs"}
+{"level":"info","ts":"2026-04-08T19:04:38.455Z","caller":"server/runtime.go:653","msg":"Initialising runtime event queue processor"}
+{"level":"info","ts":"2026-04-08T19:04:38.456Z","caller":"server/runtime.go:655","msg":"Runtime event queue processor started","size":65536,"workers":8}
+{"level":"info","ts":"2026-04-08T19:04:38.456Z","caller":"server/runtime_go.go:2794","msg":"Initialising Go runtime provider","path":"/nakama/data/modules"}
+{"level":"info","ts":"2026-04-08T19:04:38.456Z","caller":"server/runtime_go.go:2818","msg":"Go runtime modules loaded"}
+{"level":"info","ts":"2026-04-08T19:04:38.456Z","caller":"server/runtime_lua.go:116","msg":"Initialising Lua runtime provider","path":"/nakama/data/modules"}
+{"level":"error","ts":"2026-04-08T19:04:38.464Z","caller":"server/runtime_lua.go:2271","msg":"Could not complete runtime invocation","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
+{"level":"error","ts":"2026-04-08T19:04:38.464Z","caller":"server/runtime.go:667","msg":"Error initialising Lua runtime provider","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
+{"level":"fatal","ts":"2026-04-08T19:04:38.464Z","caller":"main.go:197","msg":"Failed initializing runtime modules","error":"/nakama/data/modules/test.lua:6: attempt to index a non-table object(nil) with key 'register_rpc'\nstack traceback:\n\t/nakama/data/modules/test.lua:6: in main chunk\n\t[G]: ?"}
